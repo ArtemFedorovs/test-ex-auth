@@ -30,7 +30,7 @@ export default defineComponent({
   },
   methods: {
     register () {
-      this.$axios.post('http://localhost:3000/register', { email: this.emailValue, password: this.passwordValue })
+      this.$axios.post('/register', { email: this.emailValue, password: this.passwordValue })
         .then((res) => {
           localStorage.setItem('AuthToken', res.data)
           this.$router.push('/about-me')
@@ -39,7 +39,7 @@ export default defineComponent({
     },
 
     login () {
-      this.$axios.post('http://localhost:3000/login', { email: this.emailValue, password: this.passwordValue })
+      this.$axios.post('/login', { email: this.emailValue, password: this.passwordValue })
         .then((res) => {
           localStorage.setItem('AuthToken', res.data)
           this.$router.push('/about-me')

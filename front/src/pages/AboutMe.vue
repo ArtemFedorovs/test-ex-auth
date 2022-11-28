@@ -53,7 +53,7 @@ export default defineComponent({
     async newData () { // Создание новой строки данных
       const data = { header: this.dataHeader, body: this.dataBody }
       await this.$axios.put(
-        "http://localhost:3000/user-data",
+        "/user-data",
         data,
         { headers: { authorization: localStorage.getItem('AuthToken') } }
       )
@@ -91,7 +91,7 @@ export default defineComponent({
       }
     )
     this.auth = localStorage.getItem('AuthToken') || "" // проверка авторизации
-    this.$axios.get("http://localhost:3000/user-data")
+    this.$axios.get("/user-data")
       .then((res) => {
         this.userData = res.data
         this.userData.find(element => element.role === "email") || this.userData.push({ // Добавление в ui минимально необходимых полей, если их нет

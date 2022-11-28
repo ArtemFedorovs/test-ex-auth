@@ -45,7 +45,7 @@ export default defineComponent({
   },
   methods: {
     deleteNote () {
-      this.$axios.delete('http://localhost:3000/user-data/' + this.userData._id)
+      this.$axios.delete('/user-data/' + this.userData._id)
         .then((res) => { this.$emit("deleteOnClientSide", this.userData._id) }) // Передаем родителю id удаленного элеменда
         .catch((err) => { console.log(err) })
     },
@@ -53,7 +53,7 @@ export default defineComponent({
     async saveEditNote () { // Сохраняем внесённые в запись изменения на бекенд
       const data = { header: this.header, body: this.body, role: this.userData.role }
       await this.$axios.patch(
-        "http://localhost:3000/user-data/" + this.userData._id,
+        "/user-data/" + this.userData._id,
         data
       )
         .then((res) => {
