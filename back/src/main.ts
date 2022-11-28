@@ -11,10 +11,9 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 
 async function start(): Promise<any>{
-  const PORT = 3000;
   const app = await NestFactory.create(AppModule);
   app.enableCors();
-  await app.listen(PORT, () => { console.log("Сервер запущен")});
+  await app.listen(process.env.PORT || 3000, () => { console.log("Сервер запущен")});
 }
 
 start()
