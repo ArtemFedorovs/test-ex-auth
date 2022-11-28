@@ -17,7 +17,7 @@ export default defineComponent({
   methods: {
     logOut () {
       localStorage.setItem('AuthToken', "")
-      this.$router.go(0)
+      this.$router.go(0) // Перезагрузка страницы
     }
   }
 

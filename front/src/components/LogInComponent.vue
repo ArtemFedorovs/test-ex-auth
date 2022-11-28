@@ -35,17 +35,16 @@ export default defineComponent({
           localStorage.setItem('AuthToken', res.data)
           this.$router.push('/about-me')
         })
-        .catch((err) => { console.log(err) })
+        .catch((err) => { if (err.response.status === 400) { alert("Такой пользователь уже есть") } })
     },
 
     login () {
-      console.log("clic")
       this.$axios.post('http://localhost:3000/login', { email: this.emailValue, password: this.passwordValue })
         .then((res) => {
           localStorage.setItem('AuthToken', res.data)
           this.$router.push('/about-me')
         })
-        .catch(() => { alert("Неверные логин и/или пароль") })
+        .catch((err) => { if (err.response.status === 400) { alert("Неверные логин и/или пароль") } })
     }
   }
 

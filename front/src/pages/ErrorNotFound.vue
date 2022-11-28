@@ -1,25 +1,11 @@
 <template>
-  <div class="fullscreen bg-blue text-white text-center q-pa-md flex flex-center">
-    <div>
-      <div style="font-size: 30vh">
-        404
-      </div>
-
-      <div class="text-h2" style="opacity:.4">
-        Oops. Nothing here...
-      </div>
-
-      <q-btn
-        class="q-mt-xl"
-        color="white"
-        text-color="blue"
-        unelevated
-        to="/"
-        label="Go Home"
-        no-caps
-      />
-    </div>
-  </div>
+  <q-page class="row items-center justify-evenly">
+    <q-card rounded class="my-card relative-position log-in-container bg-primary">
+      <q-card-section class="absolute-top text-h6 text-center">
+        Такой страницы не существует!
+      </q-card-section>
+    </q-card >
+  </q-page >
 </template>
 
 <script lang="ts">

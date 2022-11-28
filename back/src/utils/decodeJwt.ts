@@ -7,7 +7,7 @@ export default (hash) =>{ //мидлвар для проверки автори�
         try {
             const decodedToken = jwt.verify(token, "secretkey");  
             return decodedToken["user"]
-        } catch(err) {throw new HttpException("Нет доступа", 500)}
+        } catch(err) {throw new HttpException("Нет доступа", 403)} // кидает эту ошибку также в случае истечения токена
         
     } else {
         throw new HttpException("Нет доступа", 500)

@@ -1,24 +1,27 @@
 <template>
   <q-page class="row items-center justify-evenly container">
-    <div id="q-app" style="min-height: 100vh;">
+    <div v-if="auth" id="q-app" style="min-height: 100vh;">
         <NoteComponent v-for="item in userData"
           :key="item._id" :userData="item"
           @deleteOnClientSide = "deleteOnClientSide"
           @editOnClientSide = "editOnClientSide">
         </NoteComponent>
         <q-card flat bordered class="my-card q-ma-md">
-          <q-card-section class="bg-primary relative-position">
-            <q-input v-model="dataHeader" label="Заголовок" />
+          <q-card-section class="bg-primary relative-position q-pa-xs">
+            <q-input class="q-ml-sm inline" :dense="true" v-model="dataHeader" label="Заголовок" />
+            <q-btn color="secondary" class="q-ma-none q-ma-xs float-right" label="Создать запись" @click="newData"/>
           </q-card-section>
           <q-separator/>
-          <q-card-section class="q-pt-none">
-            <q-input v-model="dataBody" label="Новая запись"/>
-          </q-card-section>
-          <q-card-section class="q-pt-none text-right">
-            <q-btn color="secondary" class="q-ma-sd" label="Создать запись" @click="newData"/>
+          <q-card-section class="q-pa-none">
+            <q-input class="q-ml-sm q-mb-sm" v-model="dataBody" label="Новая запись"/>
           </q-card-section>
         </q-card>
     </div>
+    <q-card v-else rounded class="my-card relative-position log-in-container bg-primary">
+      <q-card-section class="absolute-top text-h6 text-center">
+        Для начала работы авторизуйтесь!
+      </q-card-section>
+    </q-card>
   </q-page>
 </template>
 
@@ -37,16 +40,17 @@ __v?: number}[] | any[]
 export default defineComponent({
   name: 'IndexPage',
   components: { NoteComponent },
-  data (): {dataHeader: Ref<string>, dataBody: Ref<string>, userData: userDataType } {
+  data (): {dataHeader: Ref<string>, dataBody: Ref<string>, userData: userDataType, auth: string } {
     return {
       userData: [],
       dataHeader: ref(''),
-      dataBody: ref('')
+      dataBody: ref(''),
+      auth: ""
     }
   },
 
   methods: {
-    async newData () {
+    async newData () { // Создание новой строки данных
       const data = { header: this.dataHeader, body: this.dataBody }
       await this.$axios.put(
         "http://localhost:3000/user-data",
@@ -76,7 +80,18 @@ export default defineComponent({
   },
 
   created () {
-    this.$axios.get("http://localhost:3000/user-data", { headers: { authorization: localStorage.getItem('AuthToken') } })
+    this.$axios.interceptors.response.use( // Сценарий истечения токена. Выходим из учетной записи чтобы пользователь вновь ввел логин/пароль
+      (response) => response,
+      async (err) => {
+        if (err?.response?.status === 403) {
+          localStorage.setItem('AuthToken', "")
+          this.$router.go(0) // Перезагрузка страницы
+        }
+        return err
+      }
+    )
+    this.auth = localStorage.getItem('AuthToken') || "" // проверка авторизации
+    this.$axios.get("http://localhost:3000/user-data")
       .then((res) => {
         this.userData = res.data
         this.userData.find(element => element.role === "email") || this.userData.push({ // Добавление в ui минимально необходимых полей, если их нет
