@@ -6,7 +6,7 @@
           <router-link to="/" class="float-left">Авторизация</router-link>
         </q-toolbar-title>
         <q-toolbar-title>
-          <router-link to="/about-me" class="float-right">Данные о пользователе</router-link>
+          <router-link to="/about-me" class="float-right">О пользователе</router-link>
         </q-toolbar-title>
       </q-toolbar>
     </q-header>

@@ -7,7 +7,7 @@
       <q-input class="q-ma-sm" v-model="passwordValue" label="Password" />
     </q-card-section>
     <q-card-section class="absolute-bottom">
-      <q-btn class="q-ma-sm float-left" color="secondary" label="Зарегистрировать нового пользователя" @click="register"/>
+      <q-btn class="q-ma-sm float-left" color="secondary" label="Регистрация" @click="register"/>
       <q-btn class="q-ma-sm float-right" color="secondary" label="Войти" @click="login"/>
     </q-card-section>
 </template>

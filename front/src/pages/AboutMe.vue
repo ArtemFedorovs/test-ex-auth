@@ -95,7 +95,7 @@ export default defineComponent({
       .then((res) => {
         this.userData = res.data
         this.userData.find(element => element.role === "email") || this.userData.push({ // Добавление в ui минимально необходимых полей, если их нет
-          header: "Электронная почта",
+          header: "E-mail",
           body: "",
           role: "email"
         })
@@ -110,7 +110,7 @@ export default defineComponent({
           role: "address"
         })
         this.userData.find(element => element.role === "info") || this.userData.push({
-          header: "Информация о себе",
+          header: "О себе",
           body: "",
           role: "info"
         })

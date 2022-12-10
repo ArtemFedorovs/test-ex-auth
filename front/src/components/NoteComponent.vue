@@ -1,11 +1,13 @@
 <template>
   <q-card flat bordered class="my-card q-ma-md">
     <div v-if="isEditModeOn">
-      <q-card-section class="bg-primary q-pa-none header-section">
-        <div v-if="userData.role" class="text-h5 inline q-ma-sm">{{header}}</div>
-        <q-input v-else :dense="true" class="inline q-pa-xs q-ml-sm q-my-auto header-section text-h5" v-model="header"/>
-        <q-btn class="q-ma-xs float-right" color="secondary" label="Назад" @click="editModToogle"/>
-        <q-btn class="q-ma-xs float-right" color="secondary" label="Сохранить" @click="saveEditNote"/>
+      <q-card-section class="bg-primary q-pa-none header-section row justify-between">
+        <div v-if="userData.role" class="text-h5 col q-ma-sm">{{header}}</div>
+        <q-input v-else :dense="true" class="col q-pa-xs q-ml-sm q-my-auto header-section text-h5" v-model="header"/>
+        <div class="col text-right">
+          <q-btn class="q-ma-xs" color="secondary" label="Сохранить" @click="saveEditNote"/>
+          <q-btn class="q-ma-xs" color="secondary" label="Назад" @click="editModToogle"/>
+        </div>
       </q-card-section>
       <q-separator/>
       <q-card-section class="q-pa-none"  >
@@ -13,10 +15,12 @@
       </q-card-section>
     </div>
     <div v-else>
-      <q-card-section class="bg-primary q-pa-none header-section">
-        <span class="inline text-h5 q-ma-sm">{{header}} </span>
-        <q-btn class="q-ma-xs float-right" v-if="!userData.role" color="secondary" label="Удалить" @click="deleteNote"/>
-        <q-btn class="q-ma-xs float-right" color="secondary" label="Редактировать" @click="editModToogle"/>
+      <q-card-section class="bg-primary q-pa-none header-section row justify-between">
+        <span class="col text-h5 q-ma-xs">{{header}} </span>
+        <div class="col text-right">
+          <q-btn class="q-ma-xs" color="secondary" label="Редактировать" @click="editModToogle"/>
+          <q-btn class="q-ma-xs" v-if="!userData.role" color="secondary" label="Удалить" @click="deleteNote"/>
+        </div>
       </q-card-section>
       <q-separator/>
       <q-card-section class="q-pa-sm body-section">
@@ -80,7 +84,7 @@ export default defineComponent({
 
 <style>
   .header-section{
-    height: 48px;
+    min-height: 48px;
     padding-top: 0px;
     padding-bottom: 0px;
   }
