@@ -10,7 +10,3 @@ Cерверная и клиентская части реализующие JWT 
 cd /back  
 npm i  
 npm run start:dev  
-  in another terminal:  
-cd /front  
-npm i  
-npx quasar dev  
