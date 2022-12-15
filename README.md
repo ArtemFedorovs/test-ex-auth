@@ -1,12 +1,23 @@
-Тестовое задание.  
-Cерверная и клиентская части реализующие JWT аутентификацию.  
-Регистрация нового пользователя, email в качестве login, задаваемый пользователем пароль. Подтверждение email’а не требуется.  
-Вход (logging in) пользователя в систему.  
-Выход (logging out) пользователя из системы.  
-Создание, получение, редактирование, удаление (CRUD) пользователем информации о себе: Имя, Телефон, Адрес, Информация о себе.  
-Серверная часть реализует соответствующие эндпоинты, клиентская часть реализует пользовательский интерфейс и передачу данных из него на сервер.  
+## Notes app with JWT authentication
 
-Запуск приложения локально:  
+**About project**
+- Simple note app;
+- Responsive design;
+- Few preconfigured notes: Name, Phone, Address, Personal information. (to meet test exercise requirements).
+
+
+**Functionality**
+
+- New user registration;
+- User authentication;
+- Creation, receiving, editing, deletion (CRUD) by the user of information about himself.
+
+**Project tech stack**
+- Back: TypeScript, Nest.js, Mongoose;
+- Front: Vue (Quasar), Axios.
+
+**How to run app on your PC**
+
 cd /back  
 npm i  
 npm run start:dev  
